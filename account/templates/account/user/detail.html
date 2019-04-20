@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{user.get_full_name}}{% endblock %}
+
+{% block content %}
+	<h1>{{user.get_full_name}}</h1>
+	<div class="profile-info">
+		<p>{{user.get_full_name}} is a {{user.profile.status}} with blood group {{user.profile.blood_group}}. </p>
+	
+	<h2>Contact</h2>
+	{% if request.user.profile.status == 'donor' %}
+		<p>Want to help {{user.get_full_name}}?</p>
+	{% else %}
+		<p>Need help from {{user.get_full_name}}?</p>
+	{% endif %}
+	
+	<p>Hospital: {{user.profile.hospital}}</p>
+	<p>Hospital Address: {{user.profile.address}}</p>
+	{% if flag == 1 %}
+		<p>Your request is accepted</p>
+		<p>Mail <a href="mailto:{{user.email}}" target="_blank">{{user.get_full_name}}</a></p>
+	{% else %}
+		<p>To get the contact informations of {{user.get_full_name}} like mail id 
+		{% if request.user.profile.status == 'donor' %}
+		<a href="{% url "friend_request" user.username %}">Requset blood</a>
+	
+		{% else %}
+			<a href="{% url "friend_request" user.username %}">Help {{user.get_full_name}}</a>
+		{% endif %}
+		</p>
+	{% endif %}
+
+	<!-- {% for friend in friends %}
+		{% if friend.user_from == user.get_id %}
+		<p>Your request is accepted</p>
+		{% endif %}
+	{% endfor %} -->
+	
+{% endblock %}

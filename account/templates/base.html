@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+	<div id="header">
+		<span class="logo">Blood Camp</span>
+		{% if request.user.is_authenticated %}
+			<ul class="menu">
+				<li {% if section == 'dashboard' %} class="selected"{% endif %}>
+					<a href="{% url "dashboard" %}">My dashboard</a>
+				</li>
+				<li {% if section == 'people' %} class="selected" {% endif %}>
+					<a href="{% url "user_list" %}">People</a>
+				</li>
+				<li {% if section == 'friend_requests' %} class="selected" {% endif %}>
+					<a href="{% url "friends_req" %}">Requests</a>
+				</li>
+				<li {% if section == 'confirmed' %} class="selected" {% endif %}>
+					<a href="{% url "friends" %}">Confirmed Requests</a>
+				</li>
+			</ul>
+		{% endif %}
+
+		<span class="user">
+			{% if request.user.is_authenticated %}
+				Hello {{request.user.first_name}}
+				<a href="{% url "logout" %}">Logout</a>
+			{% else %}
+				<a href="{% url "login" %}">Log-in</a>
+			{% endif %}
+		</span>
+	</div>
+	<div id="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+</html>
