@@ -7,11 +7,11 @@
 	<div class="row">
 	  	{% for friend in friends %}
 		  <div class="col-sm-6">
-			<div class="card">
+			<div class="card border border-success">
 		      <div class="card-body">
 		        <h5 class="card-title"><a href="{{friend.from_user.get_absolute_url}}">{{friend.from_user}}</a></h5>
-		        <a href="{% url "friend_confirm" friend.from_user.id %}">Confirm</a>
-		        <a href="{% url "friend_reject" friend.from_user.id %}">Reject</a>
+		        <a href="{% url "friend_confirm" friend.from_user.id %}" class="btn btn-success">Confirm</a>
+		        <a href="{% url "friend_reject" friend.from_user.id %}" class="btn btn-danger">Reject</a>
 		        <!-- <p class="card-text"><p>{{user.profile.status}}<br>{{user.profile.blood_group}}</p></p>
 		        <a href="{{user.get_absolute_url}}" class="btn btn-primary">User Profile</a> -->
 		      </div>

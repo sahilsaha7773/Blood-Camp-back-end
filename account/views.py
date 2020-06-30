@@ -34,20 +34,26 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
-	return render(request, 'account/dashboard.html', {'section': dashboard})
+	f = Friend.objects.friends(request.user)
+	users = User.objects.filter(is_active=True).exclude(username=request.user.username).exclude(is_superuser=True)
+	return render(request, 'account/dashboard.html', {'section': dashboard, 'f': f})
 
 def register(request):
 	if request.method == 'POST':
 		user_form = UserRegistrationForm(request.POST)
-		if user_form.is_valid():
+		profile_form = ProfileEditForm(request.POST)
+		if user_form.is_valid() and profile_form.is_valid():
 			new_user = user_form.save(commit=False)
 			new_user.set_password(user_form.cleaned_data['password'])
 			new_user.save()
+
 			Profile.objects.create(user=new_user)
+			ProfileEditForm(instance=new_user.profile, data=request.POST).save()
 			return render(request, 'account/register_done.html', {'new_user': new_user})
 	else:
 		user_form = UserRegistrationForm()
-	return render(request, 'account/register.html', {'user_form': user_form})
+		profile_form = ProfileEditForm()
+	return render(request, 'account/register.html', {'user_form': user_form, 'profile_form':profile_form})
 
 @login_required
 def edit(request):
@@ -67,19 +73,23 @@ def edit(request):
 
 @login_required
 def user_list(request):
+	friends = Friend.objects.friends(request.user)
+	friends = len(friends)
 	users = User.objects.filter(is_active=True).exclude(username=request.user.username).exclude(is_superuser=True)
-	return render(request, 'account/user/list.html', {'section': 'people', 'users': users})
+	return render(request, 'account/user/list.html', {'section': 'people', 'users': users, 'friends': friends})
 
 @login_required
 def user_detail(request, username):
 	user = get_object_or_404(User, username=username, is_active=True)
 	f = Friend.objects.friends(request.user)
+	flag = 0
 	for i in f:
 		if i==user:
 			flag = 1
-		else:
-			flag = 0
-	
+	friendsr = Friend.objects.unread_requests(user=request.user)
+	for j in friendsr:
+		if j.to_user==user.id:
+			flag = 2
 	return render(request, 'account/user/detail.html', {'section': 'people', 'user': user, 'flag': flag})
 	
 

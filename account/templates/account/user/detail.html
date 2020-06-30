@@ -4,32 +4,33 @@
 
 {% block content %}
 	<h1>{{user.get_full_name}}</h1>
-	<div class="profile-info">
-		<p>{{user.get_full_name}} is a {{user.profile.status}} with blood group {{user.profile.blood_group}}. </p>
+	<div {% if user.profile.status == 'Donor' %}class="card border border-success"{% else %}class="card border border-danger"{% endif %} >
+		<div class="card-body">
+		<p><strong>About: </strong>{{user.get_full_name}} is a {{user.profile.status}} with blood group {{user.profile.blood_group}}. </p>
 	
-	<h2>Contact</h2>
-	{% if request.user.profile.status == 'donor' %}
-		<p>Want to help {{user.get_full_name}}?</p>
-	{% else %}
-		<p>Need help from {{user.get_full_name}}?</p>
-	{% endif %}
-	
-	<p>Hospital: {{user.profile.hospital}}</p>
-	<p>Hospital Address: {{user.profile.address}}</p>
-	{% if flag == 1 %}
-		<p>Your request is accepted</p>
-		<p>Mail <a href="mailto:{{user.email}}" target="_blank">{{user.get_full_name}}</a></p>
-	{% else %}
-		<p>To get the contact informations of {{user.get_full_name}} like mail id 
-		{% if request.user.profile.status == 'donor' %}
-		<a href="{% url "friend_request" user.username %}">Requset blood</a>
-	
+		<h3>Contact</h3>
+		{% if user.profile.status == 'Donor' %}
+			<p><strong>Need help from {{user.get_full_name}}?</strong></p>
+			
 		{% else %}
-			<a href="{% url "friend_request" user.username %}">Help {{user.get_full_name}}</a>
+			<p><strong>Want to help {{user.get_full_name}}?</strong></p>
 		{% endif %}
-		</p>
-	{% endif %}
+		
+		<p><strong>Hospital:</strong> {{user.profile.hospital}}<br>
+		<strong>Hospital Address:</strong> {{user.profile.address}}</p>
 
+		{% if flag == 1 %}
+			<p><strong>Your request is accepted.</strong></p>
+			<p><a href="mailto:{{user.email}}" target="_blank" class="btn btn-success">Mail {{user.get_full_name}}</a></p>
+		{% elif flag == 2 %}
+			<p>Your request is awaiting confirmation.</p>	
+		{% else %}
+			<p>	
+			<button href="{% url "friend_request" user.username %}" onclick="window.location='{% url "friend_request" user.username %}';" class="btn btn-success">Request Contact Information</button>
+			</p>
+		{% endif %}
+		</div>
+	</div>
 	<!-- {% for friend in friends %}
 		{% if friend.user_from == user.get_id %}
 		<p>Your request is accepted</p>

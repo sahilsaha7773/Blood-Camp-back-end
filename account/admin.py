@@ -6,6 +6,7 @@ from friendship.models import Friend, Follow, Block
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
 	list_display = ['user', 'blood_group', 'status']
+	list_filter = ['status']
 
 # @admin.register(Friend)
 # class FriendAdmin(admin.ModelAdmin):

@@ -1,9 +1,18 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
 	<h1>Dashboard</h1>
 	<p>Welcome to your dashboard {{user.first_name}}. You are a {{user.profile.status}} and your blood group is {{user.profile.blood_group}}. To update your details <a href="{% url "edit" %}">edit your profile</a>.
 	{{ FriendshipRequest.user_to }}</p>
+	<div class="progress">
+	  <div class="progress-bar progress-bar-striped active" role="progressbar"
+	  aria-valuenow="{{f.count}}" aria-valuemin="0" aria-valuemax="100" style="width:{{f.count}}">
+	    {{f.count}}
+	  </div>
+	</div>
+	<div class="text-center">
+		<img src="{% static "images/blood.png"%}" class="img-fluid">
+	</div>
 {% endblock %}

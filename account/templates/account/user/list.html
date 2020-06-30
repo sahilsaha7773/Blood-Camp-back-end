@@ -7,11 +7,12 @@
 	<div class="row">
 	  	{% for user in users %}
 		  <div class="col-sm-6">
-			<div class="card" style="margin-bottom: 20px">
+			<div {% if user.profile.status == 'Donor' %}class="card border border-success"{% else %}class="card border border-danger"{% endif %} style="margin-bottom: 20px">
 		      <div class="card-body">
-		        <h5 class="card-title"><a href="{{user.get_absolute_url}}">{{user.first_name}}</a></h5>
-		        <p class="card-text"><p>{{user.profile.status}}<br>{{user.profile.blood_group}}</p></p>
-		        <a href="{{user.get_absolute_url}}" class="btn btn-primary">User Profile</a>
+		        <h5 class="card-title text-primary"><a href="{{user.get_absolute_url}}"><span class="text-primary">{{user.first_name}}</span></a></h5>
+		        <p class="card-text"><p>User Status: {{user.profile.status}}<br>User Blood Group: {{user.profile.blood_group}}</p></p>
+		        <!-- {{friends}} -->
+		        <a href="{{user.get_absolute_url}}" {% if user.profile.status == 'Donor' %}class="btn btn-success"{% else %}class="btn btn-danger"{% endif %}>User Profile</a>
 		      </div>
 		    </div>
 		  </div>
