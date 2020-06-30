@@ -21,7 +21,7 @@
 
 		{% if flag == 1 %}
 			<p><strong>Your request is accepted.</strong></p>
-			<p><a href="mailto:{{user.email}}" target="_blank" class="btn btn-success">Mail {{user.get_full_name}}</a></p>
+			<p><a href="mailto:{{user.email}}" target="_blank" class="btn btn-success">Send a mail to {{user.get_full_name}}</a></p>
 		{% elif flag == 2 %}
 			<p>Your request is awaiting confirmation.</p>	
 		{% else %}
