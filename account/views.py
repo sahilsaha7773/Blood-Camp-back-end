@@ -87,9 +87,9 @@ def user_detail(request, username):
 		if i==user:
 			flag = 1
 			break
-	friendsr = Friend.objects.unread_requests(user=request.user)
+	friendsr = Friend.objects.unread_requests(user=user)
 	for j in friendsr:
-		if j.to_user==user.id:
+		if j.from_user==request.user:
 			flag = 2
 			break
 	return render(request, 'account/user/detail.html', {'section': 'people', 'user': user, 'flag': flag})
