@@ -38,7 +38,7 @@
 			{% endif %}
 		</span>
 	</div> -->
-	<nav class="navbar navbar-expand-lg navbar-light"  style="background-color: #e3f2fd;">
+	<nav class="navbar navbar-expand-lg navbar-dark"  style="background-color: #6C63FF;">
 	  <a class="navbar-brand" href="{% url "dashboard" %}">Blood Camp</a>
 	  
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,18 +47,18 @@
 	  {% if request.user.is_authenticated %}
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto">
-	      <li {% if section == 'dashboard' %}class="nav-item active"{%else%}class="nav-item"{% endif %}>
+	      <li {% if section == 'dashboard' %}class="nav-item active"{%else%}class="nav-item active"{% endif %}>
 	        <a class="nav-link" href="{% url "dashboard" %}">Dashboard</a>
 	      </li>
-	      <li class="nav-item">
+	      <li class="nav-item active">
 	        <a class="nav-link" href="{% url "user_list" %}">
 	          People
 	        </a>
 	      </li>
-	      <li class="nav-item">
+	      <li class="nav-item active">
 	        <a class="nav-link" href="{% url "friends_req" %}">Requests</a>
 	      </li>
-	      <li class="nav-item">
+	      <li class="nav-item active">
 	      	<a  class="nav-link" href="{% url "friends" %}">Confirmed Requests</a>
 	      </li>
 	    </ul>
