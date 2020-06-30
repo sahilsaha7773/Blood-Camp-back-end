@@ -31,7 +31,7 @@ SECRET_KEY = 'f_0ueyc2hcebpddksk))8h_b#_e##*ye@i6x4&0glg7gm2@vku'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','bloodcamp.herokuapp.com']
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
