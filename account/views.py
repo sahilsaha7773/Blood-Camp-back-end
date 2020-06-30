@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest, Http404
 from django.contrib.auth.models import User
 from friendship.models import Friend, Follow, Block
-
+from django.http import JsonResponse
 # Create your views here.
 
 def user_login(request):
@@ -81,6 +81,8 @@ def user_list(request):
 @login_required
 def user_detail(request, username):
 	user = get_object_or_404(User, username=username, is_active=True)
+	if(user==request.user):
+		return edit(request)
 	f = Friend.objects.friends(request.user)
 	flag = 0
 	for i in f:
@@ -108,14 +110,14 @@ def frequest(request, username):
 	    request.user,                               # The sender
 	    other_user,                                 # The recipient
 	    message='Hi! I would like to add you')      # This message is optional
-	return HttpResponse('Your request was sent')
+	return JsonResponse({'sent':1})
 
 @login_required
 def fconfirm(request, username):
 	from friendship.models import FriendshipRequest
 	friend_request = FriendshipRequest.objects.get(to_user=request.user,from_user=username)
 	friend_request.accept()
-	return HttpResponse("Confirmed")
+	return JsonResponse({'confirmed':1})
 	# or friend_request.reject()
 
 @login_required
@@ -123,7 +125,7 @@ def freject(request, username):
 	from friendship.models import FriendshipRequest
 	friend_request = FriendshipRequest.objects.get(to_user=request.user,from_user=username)
 	friend_request.reject()
-	return HttpResponse("Rejected")
+	return JsonResponse({'rejected':1})
 
 @login_required
 def fl(request):#friends

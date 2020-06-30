@@ -7,17 +7,16 @@
 
 	<h1>Confirmed Requests</h1>
 	<div class="row">
-		{% friends request.user %}
-	  	<!-- {% for friend in friends %}
+	  	{% for friend in friends %}
 		  <div class="col-sm-6">
 			<div class="card">
 		      <div class="card-body">
-		        <h5 class="card-title"><a href="{{friend.from_user.get_absolute_url}}">asa</a></h5>
-		        <p class="card-text"><p>{{user.profile.status}}<br>{{user.profile.blood_group}}</p></p>
-		        <a href="{{user.get_absolute_url}}" class="btn btn-primary">User Profile</a>
+		        <h5 class="card-title"><a href="{{friend.get_absolute_url}}">{{friend.username}}</a></h5>
+		        <p class="card-text"><p>{{friend.profile.status}}<br>{{friend.profile.blood_group}}</p></p>
+		        <a href="{{friend.get_absolute_url}}" class="btn" style="background-color: #e3f2fd">User Profile</a>
 		      </div>
 		    </div>
 		  </div>
-	    {% endfor %} -->
+	    {% endfor %}
   	</div>
 {% endblock %}
