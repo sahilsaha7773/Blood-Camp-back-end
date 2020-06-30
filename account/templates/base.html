@@ -4,10 +4,13 @@
 <head>
 	<title>{% block title %}{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-	<div id="header" class="header" style="background-color: ">
+	<!-- <div id="header" class="header" style="background-color: ">
 		<span class="logo">Blood Camp</span>
 		{% if request.user.is_authenticated %}
 			<ul class="menu">
@@ -34,10 +37,45 @@
 				<a href="{% url "login" %}">Log-in</a>
 			{% endif %}
 		</span>
-	</div>
-	<div id="content">
+	</div> -->
+	<nav class="navbar navbar-expand-lg navbar-light"  style="background-color: #e3f2fd;">
+	  <a class="navbar-brand" href="{% url "dashboard" %}">Blood Camp</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  {% if request.user.is_authenticated %}
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li {% if section == 'dashboard' %}class="nav-item active"{%else%}class="nav-item"{% endif %}>
+	        <a class="nav-link" href="{% url "dashboard" %}">Dashboard</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url "user_list" %}">
+	          People
+	        </a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url "friends_req" %}">Requests</a>
+	      </li>
+	      <li class="nav-item">
+	      	<a  class="nav-link" href="{% url "friends" %}">Confirmed Requests</a>
+	      </li>
+	    </ul>
+	    <span class="navbar-text">
+	    	{% if request.user.is_authenticated %}
+				Hello {{request.user.first_name}}
+				<a href="{% url "logout" %}">Logout</a>
+			{% else %}
+				<a href="{% url "login" %}">Log-in</a>
+			{% endif %}
+	    </span>
+	  </div>
+	  {% endif %}
+	</nav>
+	<div class="container" id="content">
 		{% block content %}
 		{% endblock %}
 	</div>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>

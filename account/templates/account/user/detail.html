@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}{{user.get_full_name}}{% endblock %}
+{% block title %}{{user.get_full_name}} | Blood Camp{% endblock %}
 
 {% block content %}
 	<h1>{{user.get_full_name}}</h1>
-	<div {% if user.profile.status == 'Donor' %}class="card border border-success"{% else %}class="card border border-danger"{% endif %} >
+	<div {% if user.profile.status == 'Donor' %}class="card border border-success"{% else %}class="card border border-danger"{% endif %} style="margin-top: 20px;">
 		<div class="card-body">
 		<p><strong>About: </strong>{{user.get_full_name}} is a {{user.profile.status}} with blood group {{user.profile.blood_group}}. </p>
 	
@@ -26,7 +26,7 @@
 			<p>Your request is awaiting confirmation.</p>	
 		{% else %}
 			<p>	
-			<button href="{% url "friend_request" user.username %}" onclick="window.location='{% url "friend_request" user.username %}';" class="btn btn-success">Request Contact Information</button>
+			<button href="{% url "friend_request" user.username %}" onclick="window.location='{% url "friend_request" user.username %}';" class="btn" style="background-color: #e3f2fd">Request Contact Information</button>
 			</p>
 		{% endif %}
 		</div>

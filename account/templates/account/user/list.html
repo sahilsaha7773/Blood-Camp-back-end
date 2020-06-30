@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}People{% endblock %}
+{% block title %}People | Blood Camp{% endblock %}
 
 {% block content %}
 	<h1>People</h1>
-	<div class="row">
+	<div class="row" style="margin-top: 20px">
 	  	{% for user in users %}
 		  <div class="col-sm-6">
 			<div {% if user.profile.status == 'Donor' %}class="card border border-success"{% else %}class="card border border-danger"{% endif %} style="margin-bottom: 20px">
@@ -12,7 +12,7 @@
 		        <h5 class="card-title text-primary"><a href="{{user.get_absolute_url}}"><span class="text-primary">{{user.first_name}}</span></a></h5>
 		        <p class="card-text"><p>User Status: {{user.profile.status}}<br>User Blood Group: {{user.profile.blood_group}}</p></p>
 		        <!-- {{friends}} -->
-		        <a href="{{user.get_absolute_url}}" {% if user.profile.status == 'Donor' %}class="btn btn-success"{% else %}class="btn btn-danger"{% endif %}>User Profile</a>
+		        <a href="{{user.get_absolute_url}}" {% if user.profile.status == 'Donor' %}class="btn btn-success"{% else %}class="btn"{% endif %} style="background-color: #e3f2fd">User Profile</a>
 		      </div>
 		    </div>
 		  </div>
