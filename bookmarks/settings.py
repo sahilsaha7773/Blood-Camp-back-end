@@ -44,6 +44,11 @@ LOGOUT_URL = 'logout'
 # Application definition
 ADMINS = [('Sahil Saha', 'sahilsaha7773@gmail.com')]
 MANAGERS = ADMINS
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sahilsaha7773@gmail.com'
+EMAIL_HOST_PASSWORD = 'maynaguri22'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
