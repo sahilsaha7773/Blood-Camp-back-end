@@ -34,7 +34,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = 'f_0ueyc2hcebpddksk))8h_b#_e##*ye@i6x4&0glg7gm2@vku'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','bloodcamp.herokuapp.com']
 
@@ -42,13 +42,7 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 # Application definition
-ADMINS = [('Sahil Saha', 'sahilsaha7773@gmail.com')]
-MANAGERS = ADMINS
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sahilsaha7773@gmail.com'
-EMAIL_HOST_PASSWORD = 'maynaguri22'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
