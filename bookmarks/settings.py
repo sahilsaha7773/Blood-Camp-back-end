@@ -42,6 +42,8 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 # Application definition
+ADMINS = [('Sahil Saha', 'sahilsaha7773@gmail.com')]
+MANAGERS = ADMINS
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
